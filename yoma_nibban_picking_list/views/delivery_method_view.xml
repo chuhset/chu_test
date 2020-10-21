@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="custom_delivery_method_tree" model="ir.ui.view">
+            <field name="name">Custom Delivery Method</field>
+            <field name="model">custom.delivery.method</field>
+            <field name="arch" type="xml">
+                <tree string='Delivery Method'>
+                    <field name='name'/>
+                </tree>
+            </field>
+        </record>
+
+         <record id="custom_delivery_method_form" model='ir.ui.view'>
+            <field name="name">Custom Delivery Method</field>
+            <field name="model">custom.delivery.method</field>
+            <field name="arch" type="xml">
+                <form string="Delivery Method">
+                  <sheet string="Delivery Method">
+                    <group>
+                        <field name='name'/>
+                    </group>
+                  </sheet>
+                </form>
+            </field>
+         </record>
+
+        <record id="action_custom_delivery_method" model="ir.actions.act_window">
+            <field name="name">Delivery Method</field>
+            <field name="res_model">custom.delivery.method</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_sale_custom_delivery_method" name="Delivery Methods"
+                  action="action_custom_delivery_method" sequence="5"
+                  parent="sale.menu_sales_config" groups="sale_management.group_sale_order_template"/>
+
+        <menuitem id="menu_inventory_custom_delivery_method" name="Delivery Methods"
+                  action="action_custom_delivery_method" sequence="2"
+                  parent="delivery.menu_delivery"/>
+
+        <record id="view_sale_order_form_inh" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="delivery_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_stock_picking_form_inh" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="delivery_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_stock_picking_tree_inh" model="ir.ui.view">
+            <field name="name">stock.picking.tree</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="delivery_id"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

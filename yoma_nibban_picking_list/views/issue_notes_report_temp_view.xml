@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="report_issue_notes_temp">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="doc_ids" t-as="o">
+                        <div class="page" style="font-size:11px;">
+                        	<br/>
+                        	<h3 class="text-center text-primary"><center>Picking List</center></h3>
+                                <table class="table" style="font-size:15px">
+                                    <thead>
+                                        <tr>
+                                            <td>
+                                                <center><b>From Location</b></center>
+                                            </td>
+                                            <td>
+                                               <center> <b>Scheduled Date</b></center>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                        <tr>
+                                            <td>
+                                              <center> <span t-field="o.location_id.location_id.name"/>/<span t-field="o.location_id.name"/> </center>
+                                            </td>
+                                            <td>
+                                                <center> <span t-field="o.scheduled_date"/> </center>
+                                            </td>
+                                        </tr>
+                                </table>
+                                <br/><br/>
+                                <t t-foreach="get_inventory_details(o)" t-as="data">
+                                    <t t-set="total" t-value="0"/>
+                                    <t t-set="carrier_rec"
+                                       t-value="request.env['custom.delivery.method'].sudo().search([('id', '=',int(data))])"/>
+                                    <strong style="font-size:15px">Delivery Method : <span t-esc="carrier_rec.name" style="font-size:15px;"/></strong> <br/>
+                                        <table class="table" style="font-size:11px" >
+                                            <thead>
+                                                <tr>
+                                                    <td style="width:auto !important;" class="autowidth"><b>ITEM</b></td>
+                                                    <td style="width:auto !important;" class="autowidth"><b>UNIT</b></td>
+                                                    <td style="width:auto !important;" class="autowidth"><b>QTY</b></td>
+                                                </tr>
+                                            </thead>
+                                            <tr t-foreach="data_value" t-as="data1">
+                                                <td style="width:auto !important;" class="autowidth">
+                                                    <t t-set="product_rec"
+                                                    t-value="request.env['product.product'].sudo().search([('id', '=',data1['id'])])"/>
+                                                    <span t-esc="product_rec.name" />
+                                                </td>
+                                                <td style="width:auto !important;" class="autowidth">
+                                                    <span t-esc="data1['unit']"/>
+                                                </td>
+                                                <td style="width:auto !important;" class="autowidth">
+                                                    <span t-esc="data1['qty']" />
+                                                    <t t-set="total" t-value="total + data1['qty']"/>
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td style="width:auto !important;">
+                                                    <b>Grand Total</b>
+                                                </td>
+                                                 <td style="width:auto !important;"></td>
+                                                <td style="width:auto !important;">
+                                                   <b><span t-esc="total"/></b>
+                                                </td>
+                                             </tr>
+                                        </table>
+                                    <br/>
+                                    <strong class="pull-right" style="font-size:15px">Signature :____________________</strong><br/> <br/>
+                                    <strong class="pull-right" style="font-size:15px">Name :____________________</strong> <br/>
+                                 <p style="page-break-before:always;"> </p>
+						        </t>
+						</div>
+					</t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

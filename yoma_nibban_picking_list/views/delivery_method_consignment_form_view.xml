@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_consignment_order_inherit" model="ir.ui.view">
+            <field name="name">consignment.form.order</field>
+            <field name="model">consignment.order</field>
+            <field name="inherit_id" ref="sale_consignment.view_consignment_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="delivery_id"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

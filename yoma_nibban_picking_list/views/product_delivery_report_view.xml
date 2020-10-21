@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="wizard_issue_notes_report" model="ir.ui.view">
+            <field name="name">orders.report.issue.notes</field>
+            <field name="model">order.report.issue.notes.ee</field>
+            <field name="arch" type="xml">
+                <form string="Issue Notes Report">
+                    <group col="4">
+                    	<field name="location_id"/>
+                    	<field name="scheduled_date"/>
+                    </group>
+                    <group>
+                        <field name="carrier_ids" widget="many2many_checkboxes"/>
+                    </group>
+                    <footer>
+                    	<button name='print_report' string="Print Report" class="pull-right"
+                    	type="object" style="color : white;background-color : green;" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_issue_notes_report" model="ir.actions.act_window">
+            <field name="name">Inventory Issue Notes Report</field>
+            <field name="res_model">order.report.issue.notes.ee</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_issue_notes_report" name="Picking Lists"
+            sequence="5" action="action_issue_notes_report" parent="stock.menu_stock_warehouse_mgmt"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+    <report 
+            id="action_report_by_issue_notes"
+            string="Picking List Report"
+            model="order.report.issue.notes.ee"
+            report_type="qweb-pdf"
+            file="yoma_nibban_picking_list.report_issue_notes_temp"
+            name="yoma_nibban_picking_list.report_issue_notes_temp"/>
+    </data>
+</odoo>
