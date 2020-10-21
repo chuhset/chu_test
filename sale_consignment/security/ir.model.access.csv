@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_consignment_order,sale_consignment.order,model_consignment_order,sales_team.group_sale_salesman,1,1,1,0
+access_consignment_order_line,sale_consignment.order.line,model_consignment_order_line,sales_team.group_sale_salesman,1,1,1,1
+access_consignment_order_line_accountant,sale_consignment.order.line accountant,model_consignment_order_line,account.group_account_user,1,1,0,0
+access_consignment_order_portal,sale_consignment.order.portal,sale_consignment.model_consignment_order,base.group_portal,1,0,0,0
+access_consignment_order_line_portal,sale_consignment.order.line.portal,sale_consignment.model_consignment_order_line,base.group_portal,1,0,0,0
+access_consignment_order_manager,sale_consignment.order.manager,model_consignment_order,sales_team.group_sale_manager,1,1,1,1
+access_consignment_order_accountant,sale_consignment.order.accountant,model_consignment_order,account.group_account_user,1,1,0,0
+access_consignment_order_invoicing_payments,sale_consignment.order,model_consignment_order,account.group_account_invoice,1,1,0,0
+access_consignment_order_line_invoicing_payments,sale_consignment.order.line,model_consignment_order_line,account.group_account_invoice,1,1,0,0
+access_consignment_order_stock_worker,sale.order stock worker,model_consignment_order,stock.group_stock_user,1,1,0,0
+access_consignment_order_line_stock_worker,sale.order.line stock worker,model_consignment_order_line,stock.group_stock_user,1,1,0,0

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_consignee_tree" model="ir.ui.view">
+        <field name="name">consignee.tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field eval="1" name="priority"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="location_id" string="Consignee Location"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_consignee_form" model="ir.ui.view">
+        <field name="name">consignee.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field eval="1" name="priority"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="before">
+                <header>
+                    <field name="consignee" invisible="True"/>
+                    <button name="toggle_consignee" string="Enable Consignee" type="object" attrs="{'invisible': [('consignee', '=', True)]}"/>
+                    <button name="toggle_consignee" string="Disable Consignee" type="object" attrs="{'invisible': [('consignee', '=', False)]}"/>
+                </header>
+            </xpath>
+
+            <xpath expr="//field[@name='image_1920']" position="before">
+                <widget name="web_ribbon" title="Consignee" bg_color="bg-info" attrs="{'invisible': ['|',('consignee', '=', False),('active', '=', False)]}"/>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Consignment" attrs="{'invisible': [('consignee', '=', False)]}">
+                    <group>
+                        <field name="location_id"/>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_consignee_filter" model="ir.ui.view">
+        <field name="name">consignee.select</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//filter[@name='type_company']" position="after">
+                <separator/>
+                <filter string="Consignees" name="type_consignee" domain="[('consignee', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

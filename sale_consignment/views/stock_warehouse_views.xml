@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="view_warehouse_consignment_inherited" model="ir.ui.view">
+            <field name="name">Stock Warehouse Consignment Inherited</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='resupply_wh_ids']" position="before">
+                    <field name="consignment_source" />
+                </xpath>
+
+                <xpath expr="//field[@name='out_type_id']" position="after">
+                    <field name="consignment_type_id" />
+                </xpath>
+            </field>
+        </record>
+
+</odoo>
