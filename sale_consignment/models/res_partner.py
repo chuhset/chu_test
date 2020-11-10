@@ -6,7 +6,7 @@ from odoo import fields, models
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    consignee = fields.Boolean('Consignee', default=False)
+    consignee = fields.Boolean('Consignee Checkbox', default=False)
     location_id = fields.Many2one('stock.location',
                                   string='Consignment Location',
                                   readonly=True, )
